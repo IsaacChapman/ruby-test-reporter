@@ -24,7 +24,7 @@ module CodeClimate
           file_path = File.join(Dir.tmpdir, random_file_name)
           print "Coverage results saved to #{file_path}... "
           File.open(file_path, "w") { |file| file.write(payload.to_json) }
-          file_path = File.join(ENV['HOME'].to_s, "results", ENV['TDDIUM_SESSION_ID'].to_s, ENV['TDDIUM_TEST_EXEC_ID'}.to_s, random_file_name)
+          file_path = File.join(ENV['HOME'].to_s, "results", ENV['TDDIUM_SESSION_ID'].to_s, ENV['TDDIUM_TEST_EXEC_ID'].to_s, random_file_name)
           print "Coverage results saved to #{file_path}... "
           File.open(file_path, "w") { |file| file.write(payload.to_json) }
           file_path = File.join(ENV['HOME'].to_s, "results", ENV['TDDIUM_SESSION_ID'].to_s, "session", random_file_name)
