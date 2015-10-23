@@ -20,9 +20,16 @@ module CodeClimate
         payload = to_payload(result)
         PayloadValidator.validate(payload)
         if write_to_file?
-          file_path = File.join(Dir.tmpdir, "codeclimate-test-coverage-#{SecureRandom.uuid}.json")
+          random_file_name = "codeclimate-test-coverage-#{SecureRandom.uuid}.json"
+          file_path = File.join(Dir.tmpdir, random_file_name)
           print "Coverage results saved to #{file_path}... "
           File.open(file_path, "w") { |file| file.write(payload.to_json) }
+          file_path = File.join(ENV['HOME'].to_s, "results", ENV['TDDIUM_SESSION_ID'].to_s, ENV['TDDIUM_TEST_EXEC_ID'}.to_s, random_file_name)
+          print "Coverage results saved to #{file_path}... "
+          File.open(file_path, "w") { |file| file.write(payload.to_json) }
+          file_path = File.join(ENV['HOME'].to_s, "results", ENV['TDDIUM_SESSION_ID'].to_s, "session", random_file_name)
+          print "Coverage results saved to #{file_path}... "
+          File.open(file_path, "w") { |file| file.write(payload.to_json) } 
         else
           client = Client.new
           print "Sending report to #{client.host} for branch #{Git.branch_from_git_or_ci}... "
